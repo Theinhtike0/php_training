@@ -16,8 +16,8 @@
   <div class="container w-30 mt-5">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3>To Do Lost</h3>
-        <form action="{{ route('store }}" method="POST" autocomplete="off">
+        <h3>To Do List</h3>
+        <form action="{{ route('store') }}" method="POST" autocomplete="off">
           @csrf
           <div class="input-group">
             <input type="text" name="content" class="form-control" placeholder="Add your new todo">
@@ -26,9 +26,11 @@
         </form>
         @if (count($todolists))
         <ul class="list-group list-group-flush mt-md-n3">
-          @foreach ($todolists as todolist)
+
+          @foreach ($todolists as $todolist)
+
           <li class="list-group-item">
-            <form action="{{ route('destroy', $todolist->id}}" method="POST">
+            <form action="{{ route('destroy',$todolist->id) }}" method="POST">
             {{ $todolist->content}}  
             @csrf
               @method('delete')
@@ -43,7 +45,7 @@
       </div>
       @if (count($todolists))
       <div class="card-footer">
-        You Have {{ count($todolists)}} pending tqasks
+        You Have {{ count($todolists)}} pending tasks
       </div>
       @else
       @endif
